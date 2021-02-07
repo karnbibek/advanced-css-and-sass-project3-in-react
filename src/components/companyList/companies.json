@@ -1,0 +1,86 @@
+{
+    "companies" : [
+        {
+            "name" : "Infosys",
+            "id" : 1,
+            "jobs" : [
+                {
+                    "title" : "React",
+                    "locations" : ["Chandigarh", "Delhi", "Noida"],
+                    "salary" : "20k to 60k rupees per month",
+                    "jobType" : "Full-time",
+                    "requirements" : ["ES6 is required", "React 16 version mut be required", "Having experience on Git"]
+                },
+                {
+                    "title" : "Nodejs",
+                    "locations" : ["Chandigarh", "Mumbai", "Bangalore"],
+                    "salary" : "20k to 60k rupees per month",
+                    "jobType" : "Full-time",
+                    "requirements" : ["ES6 is required", "Python experience must required", "Having experience on Git"]
+                },
+                {
+                    "title" : "Python",
+                    "locations" : ["Mumbai", "Pune", "Hyderabad"],
+                    "salary" : "40k to 60k rupees per month",
+                    "jobType" : "Full-time",
+                    "requirements" : ["Having 5 years of experience"]
+                }
+            ]
+        },
+        {
+            "name" : "TCS",
+            "id" : 1,
+            "jobs" : [
+                {
+                    "title" : "ReactJS",
+                    "locations" : ["Chandigarh", "Delhi", "Noida"],
+                    "salary" : "20k to 60k rupees per month",
+                    "jobType" : "Full-time",
+                    "requirements" : ["ES6 is required", "React 16 version mut be required", "Having experience on Git"]
+                },
+                {
+                    "title" : "Expressjs",
+                    "locations" : ["Chandigarh", "Mumbai", "Bangalore"],
+                    "salary" : "20k to 60k rupees per month",
+                    "jobType" : "Full-time",
+                    "requirements" : ["ES6 is required", "Python experience must required", "Having experience on Git"]
+                },
+                {
+                    "title" : "DSA",
+                    "locations" : ["Mumbai", "Pune", "Hyderabad"],
+                    "salary" : "40k to 60k rupees per month",
+                    "jobType" : "Full-time",
+                    "requirements" : ["Having 5 years of experience"]
+                }
+            ]
+        },
+        {
+            "name" : "Talk Valley LLC.",
+            "id" : 1,
+            "jobs" : [
+                {
+                    "title" : "C",
+                    "locations" : ["Chandigarh", "Delhi", "Noida"],
+                    "salary" : "20k to 60k rupees per month",
+                    "jobType" : "Full-time",
+                    "requirements" : ["ES6 is required", "React 16 version mut be required", "Having experience on Git"]
+                },
+                {
+                    "title" : "C++",
+                    "locations" : ["Chandigarh", "Mumbai", "Bangalore"],
+                    "salary" : "20k to 60k rupees per month",
+                    "jobType" : "Full-time",
+                    "requirements" : ["ES6 is required", "Python experience must required", "Having experience on Git"]
+                },
+                {
+                    "title" : "Java",
+                    "locations" : ["Mumbai", "Pune", "Hyderabad"],
+                    "salary" : "40k to 60k rupees per month",
+                    "jobType" : "Full-time",
+                    "requirements" : ["Having 5 years of experience"]
+                }
+            ]
+        }
+    ]
+ }
+ 

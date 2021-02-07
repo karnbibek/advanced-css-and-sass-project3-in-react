@@ -1,0 +1,34 @@
+.jobBrief {
+    margin-bottom: 20px; 
+    border: 2px solid black; 
+    margin: 10px; 
+    padding: 2rem;
+    cursor: pointer;
+    background-color: gainsboro;
+    color: black;
+    border-radius: 20px;
+}
+
+.jobDetail {
+    margin-bottom: 20px; 
+    border:2px solid green;
+    border-radius: 20px;
+    margin: 10px; 
+    padding: 10px;
+    cursor: pointer;
+    background-color: bisque;
+    color: black;
+    position: sticky;
+}
+
+.city {
+    margin: 1.67rem 0 1.67rem 0 !important;
+}
+
+.header {
+    margin: 1.33rem 0 1.33rem 0;
+}
+
+.paragraph {
+    margin: 1.33rem 0 1.33rem 0;
+}
