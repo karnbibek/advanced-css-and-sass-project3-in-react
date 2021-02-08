@@ -8,39 +8,42 @@ import CompanyJobs from './CompanyJobs';
 const CompanyList = (props) => {
 
     const list = () => {
-        
+
         const clickHandler = (company) => {
             props.selectedCompany(company);
             props.selectedCompanyJob(company.jobs[0])
         }
 
         return (
-            <div className="ui grid" style={{margin:"2rem"}}>
-                <div className="three column row">
-                    {props.companies.map((company) => {
-                        return (
-                            <div className="column" key={company.name}>
-                                <div className="ui carded" onClick={() => clickHandler(company)}>{company.name}</div>
-                            </div>
-                        );
-                    })}
-                </div>
+            <div className="company__header">
+                {/* <div className="three column row"> */}
+                {props.companies.map((company) => {
+                    return (
+                        <div className="company__header-item" key={company.name} onClick={() => clickHandler(company)}>
+                            {/* <div className="ui carded" onClick={() => clickHandler(company)}> */}
+                            {company.name}
+                            {/* </div> */}
+                        </div>
+                    );
+                })}
             </div>
+            // </div>
         )
     }
 
     return (
-        <div>
+        <div className="company">
             {list()}
             {props.company.selectedCompany ?
+                // <div className="company__selected">
                 <>
-                    <div className="centered">
-                        <h2>
+                    <div className="company__title">
                         {props.company.selectedCompany.name}
-                        </h2>
                     </div>
                     <CompanyJobs />
-                </> : null}
+                    </>
+                // </div>
+                : null}
         </div>
     );
 };

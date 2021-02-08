@@ -42,48 +42,50 @@ const Skills = () => {
     }
 
     return (
-        <div className="ui form">
-            <div className="ui button primary right floated" type="submit" onClick={() => setShowCard(!showCard)}>
-                {!showCard ? 'Add' : 'Cancel'}
+        <div className="profile__form">
+            <div className="profile__form-header">
+                <div className="profile__form-header-1">Skills : </div>
+                <button className="profile__form-header-2 button" type="submit" onClick={() => setShowCard(!showCard)}>
+                    {!showCard ? 'Add' : 'Cancel'}
+                </button>
             </div>
-            <h2>Skills</h2>
-                {showCard ? (
-            <div className="ui form error" onSubmit={onSubmit}>
-                {error ?
-                    (<div className="ui error message">
-                        <p>{error}</p>
-                    </div>)
-                    : null}
+            {showCard ? (
+                <div className="profile__form-body" onSubmit={onSubmit}>
+                    {error ?
+                        (<div className="profile__form-body-error">
+                            <p>{error}</p>
+                        </div>)
+                        : null}
 
-                <div className="field">
-                    <label>Skill/Technology Name</label>
-                    <input type="text" placeholder="Skill/Technology Name" defaultValue={skill} onChange={e => setSkill(e.target.value)} />
-                </div>
-                <div className="field">
-                    <label>Rating Out of 10</label>
-                    <input type="number" placeholder="Rating Out of 10" defaultValue={rating} onChange={e => setRating(e.target.value)} />
-                </div>
-                <div className="ui primary button" type="submit" onClick={onSubmit}>
-                    Add
-                </div> 
+                    <div className="profile__form-body-field-ed">
+                        <span className="text-small">Skill/Technology Name : </span>
+                        <input type="text" placeholder="Skill/Technology Name" defaultValue={skill} onChange={e => setSkill(e.target.value)} className="input input-small" />
+                    </div>
+                    <div className="profile__form-body-field-ed">
+                        <span className="text-small">Rating Out of 10 : </span>
+                        <input type="number" placeholder="Rating Out of 10" defaultValue={rating} onChange={e => setRating(e.target.value)} className="input input-small" />
+                    </div>
+                    <button className="profile__form-body-button button" type="submit" onClick={onSubmit}>
+                        Add
+                </button>
 
-            </div>
+                </div>
             ) : null}
 
             {skillRating ? (
                 skillRating.map((info) => (
-                    <div className="ui feed" key={info.skill}>
-                        <div className="ui button red right floated" onClick={() => removeHandler(info)}>
-                            Remove
+                    <div className="profile__form-details" key={info.skill}>
+                        <div className="profile__form-header">
+                            <div className="profile__form-details-header">
+                                {info.skill}
                             </div>
-                        <div className="content">
-                            <div className="header">
-                                <h3>{info.skill}</h3>
-                            </div>
-                            <div className="summary">
-                                Rating : {info.rating}/10
+                            <div className="profile__form-header-2-red button-small" onClick={() => removeHandler(info)}>
+                                Remove
                             </div>
                         </div>
+                        <div className="profile__form-details-summary">
+                            Rating : {info.rating}/10
+                            </div>
                     </div>
                 ))
             ) :

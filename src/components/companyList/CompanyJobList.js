@@ -4,34 +4,33 @@ import { selectedCompanyJob } from '../actions';
 import '../JobBrief.css';
 
 const CompanyJobList = (props) => {
+    const { link } = props;
+
     return (
-        <div className={`ui ${props.classed}`} onClick={() => props.selectedCompanyJob(props.job)}>
-            <div className="content">
-                <div className="header">
+        <div className={`${link}`} onClick={() => props.selectedCompanyJob(props.job)}>
+            {/* <div className="content"> */}
+                <div className={`${link}__header`}>
                     <h2>{props.job.title}</h2>
                 </div>
-                <div className="ui sub header city">
+                <div className={`${link}__subheader`}>
                     {props.job.locations.map((location) => {
                         return <span key={location}>{location}  </span>
                     })}
                 </div>
-                <div className="ui sub header">
+                <div className={`${link}__salary`}>
                         Salary : Rs.{props.job.salary}
                 </div>
-                <div className="content">
-                    <div className="header">
+                <div className={`${link}__subheader`}>
                         Job Type : {props.job.jobType}
-                    </div>
                 </div>
-                <ul>
+                <ul className={`${link}__description`}>
                     <h4>Job Requirements : </h4>
                     {props.job.requirements.map((req) => {
                         return <li key={req}>{req}</li>
                     })}
                 </ul>
             </div>
-            {/* <hr /> */}
-        </div>
+        // </div>
 
     );
 }

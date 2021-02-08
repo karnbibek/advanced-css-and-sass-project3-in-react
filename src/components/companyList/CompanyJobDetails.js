@@ -5,12 +5,11 @@ import CompanyJobList from './CompanyJobList';
 const CompanyJobDetails = (props) => {
     return (
         // <div>hello</div>
-        <CompanyJobList job={props.selectedCompany.selectedCompanyJob} classed="jobDetail" />
+        <CompanyJobList job={props.selectedCompany.selectedCompanyJob} link="jobDetail" />
     );
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return state;
 }
 

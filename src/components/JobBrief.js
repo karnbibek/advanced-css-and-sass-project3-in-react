@@ -5,26 +5,25 @@ class JobBrief extends Component {
     render() {
         const { job, link, jobDetailsHandler } = this.props;
         return (
-                  <div className={`ui ${link}`} onClick={() => jobDetailsHandler(job)}>
-                    <div className="content">
-                      <div className="header">
+                  <div className={`${link}`} onClick={() => jobDetailsHandler(job)}>
+                      <div className={`${link}__header`}>
                         <h4>{job.name}</h4>
                       </div>
-                      <div className="ui sub header city">
+                      <div className={`${link}__subheader`}>
                         {job.location.city}
                       </div>
-                      <div className="image">
+                      <div className={`${link}__image`}>
                         <img src={job.logo} alt="" />
                       </div>
-                      <p className="paragraph">{job.description}</p>
-                      <div className="content">
-                        <div className="header">
+                      <div className={`${link}__paragraph`}>{job.description}</div>
+                        <div className={`${link}__salary`}>
                           Salary : Rs.{job.salary}
                         </div>
-                        <span className="ui primary button">Apply</span>
-                        <span className="ui red button">Not Interested</span>
+                      <div className={`${link}__button`}>
+                        <button className={`${link}__button-apply button`}>Apply</button>
+                        <button className={`${link}__button-reject button`}>Not Interested</button>
                       </div>
-                    </div>
+                    {/* </div> */}
                     {/* <hr /> */}
                   </div>
         );

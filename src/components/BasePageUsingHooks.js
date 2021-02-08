@@ -10,13 +10,13 @@ const BasePageUsingHooks = (props) => {
     const [filterByName, setFilterByName] = useState('');
     const [filterByAddress, setFilterByAddress] = useState('');
     const [filteredJobs, setFilteredJobs] = useState(props.jobs);
-    const [jobDetail, setJobDetail] = useState([]);
+    const [jobDetail, setJobDetail] = useState(props.jobs[0]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         setTimeout(() =>
             setIsLoading(false),
-            2000);
+            200);
         // setFilteredJobs(props.jobs);
     });
 
@@ -41,36 +41,36 @@ const BasePageUsingHooks = (props) => {
     }
 
     return (
-        <div className="content">
-            <div className="content__one">
-                <div className="content__one-header">
+        <div className="contents">
+            <div className="contents__one">
+                <div className="contents__one-header">
                     {/* <h1 className="headers" style={{ marginBottom: "15px" }}> */}
                         Mentor-Students Job Portal
                         {/* </h1> */}
                 </div>
-                <div className="content__one-image">
+                <div className="contents__one-image">
                     <img src="https://picsum.photos/id/180/500/200" alt="" />
                 </div>
             </div>
                 <SearchBar nameChangeHandler={nameChangeHandler} addressChangeHandler={addressChangeHandler} />
 
-            <div className="ui grid">
-                <div className="ui row">
+            <div className="contents__grid">
+                <div className="contents__grid__row">
                     {isLoading ?
                         <div className="ui active inverted dimmer" style={{ marginTop: "20px" }}>
                             <div className="ui text loader">Loading</div>
                         </div>
                         :
-                        <div className="six wide column">
+                        <div className="contents__grid__row-col-1-of-3">
                             {/* {filteredJobs ?  */}
-                            {filteredJobs.map((job) => (<JobBrief key={job.name} job={job} link='link jobBrief' jobDetailsHandler={jobDetailsHandler} />))
+                            {filteredJobs.map((job) => (<JobBrief key={job.name} job={job} link='jobBrief' jobDetailsHandler={jobDetailsHandler} />))
                                 // : 
                                 // jobs.map((job) => (<JobBrief key={job.name} job={job} link='link jobBrief' jobDetailsHandler={jobDetailsHandler} />))
                             }
                         </div>
                     }
                     {isLoading ? null :
-                        <div className="ten wide column" style={{ width: "62.5%" }}>
+                        <div className="contents__grid__row-col-2-of-3">
                             {jobDetail.name ?
                                 <JobBrief job={jobDetail} link='jobDetail' jobDetailsHandler={jobDetailsHandler} />
                                 : 'Select a job to see the details'

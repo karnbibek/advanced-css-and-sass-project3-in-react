@@ -11,27 +11,23 @@ const CompanyJobs = ({ selected, selectedCompanyJob }) => {
     }
 
     return (
-        <div className="parent">
-        <div className="ui grid">
-            <div className="ui row">
-                <div className="six wide column">
-                    {selected.selectedCompany.jobs.map((job) => {
-                        return <CompanyJobList job={job} key={job.title} classed='jobBrief' />
-                    })
+        <div className="contents__grid__row">
+            {/* <div className="ui grid">
+                <div className="ui row"> */}
+                    <div className="contents__grid__row-col-1-of-3">
+                        {selected.selectedCompany.jobs.map((job) => {
+                            return <CompanyJobList job={job} key={job.title} classed='jobBrief' link="jobBrief" />
+                        })
+                        }
+                    </div>
+                    {selected.selectedCompanyJob ?
+                        <div className="contents__grid__row-col-2-of-3">
+                            <CompanyJobDetails />
+                        </div> : null
                     }
                 </div>
-                {selected.selectedCompanyJob ? 
-                <div className="ten wide column">
-                    {/* {selected.selectedCompanyJob.jobs.map((job) => {
-                        return <CompanyJobList job={job} key={job.title} />
-                    }) 
-                    } */}
-                    <CompanyJobDetails />
-                </div> : null
-                }
-            </div>
-        </div>
-        </div>
+            // </div>
+        // </div>
     );
 }
 

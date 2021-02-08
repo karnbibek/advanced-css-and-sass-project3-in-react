@@ -8,7 +8,7 @@ import WorkExperience from './profileComponents/WorkExperience';
 
 const Profile = () => {
     return (
-        <div className="App">
+        <div className="profile">
             <PersonalInformation />
             <WorkExperience />
             <Education />

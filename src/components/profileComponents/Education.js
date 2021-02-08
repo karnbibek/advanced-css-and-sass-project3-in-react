@@ -15,10 +15,13 @@ const Education = () => {
     const onSubmit = async (event) => {
         if (!degree || !college || !location) {
             await setError('Please enter all fields correctly!');
+            setTimeout(() => {
+                setError('');
+            }, 2000);
         }
         else {
             event.preventDefault();
-            await setError(null);
+            await setError('');
             const educationDegree = JSON.parse(localStorage.getItem("educationDegree") || '[]');
             const educat = { degree, college, location, startDate, endDate };
             localStorage.setItem('educationDegree', JSON.stringify([...educationDegree, (educat)]));
@@ -46,71 +49,76 @@ const Education = () => {
     }
 
     return (
-        <div className="ui form">
-            <div className="ui button primary right floated" type="submit" onClick={() => setShowCard(!showCard)}>
-                {!showCard ? 'Add' : 'Cancel'}
+        <div className="profile__form">
+            <div className="profile__form-header">
+                <div className="profile__form-header-1">Education : </div>
+                <button className="profile__form-header-2 button" type="submit" onClick={() => setShowCard(!showCard)}>
+                    {!showCard ? 'Add' : 'Cancel'}
+                </button>
             </div>
-            <h2>Education</h2>
-                {showCard ? (
-            <div className="ui form error" onSubmit={onSubmit}>
-                {error ?
-                    (<div className="ui error message">
-                        <p>{error}</p>
-                    </div>)
-                    : null}
+            {showCard ? (
+                <div className="profile__form-body" onSubmit={onSubmit}>
+                    {error ?
+                        (<div className="profile__form-body-error">
+                            <p>{error}</p>
+                        </div>)
+                        : null}
 
-                <div className="field">
-                    <label>Degree</label>
-                    <input type="text" placeholder="Degree" defaultValue={degree} onChange={e => setDegree(e.target.value)} />
-                </div>
-                <div className="field">
-                    <label>College</label>
-                    <input type="text" placeholder="College" defaultValue={college} onChange={e => setCollege(e.target.value)} />
-                </div>
-                <div className="field">
-                    <label>Location</label>
-                    <input type="text" placeholder="Location" defaultValue={location} onChange={e => setLocation(e.target.value)} />
-                </div>
-                <div className="field">
-                        <label>Time Period</label>
+                    <div className="profile__form-body-field-ed">
+                        <span className="text-small">Degree : </span>
+                        <input type="text" placeholder="Degree" defaultValue={degree} onChange={e => setDegree(e.target.value)} className="input input-small" />
                     </div>
-                    <div className="two fields">
-                        <div className="field">
-                            <label>From : </label>
-                            <input type="date" placeholder="Date" defaultValue={startDate} onChange={e => setStartDate(e.target.value)} />
-                        </div>
-                        <div className="field">
-                            <label>To : </label>
-                            <input type="date" placeholder="Date" defaultValue={endDate} onChange={e => setEndDate(e.target.value)} />
-                        </div>
-                    </div>
-                <div className="ui primary button" type="submit" onClick={onSubmit}>
-                    Add
-            </div> 
 
-            </div>
+                    <div className="profile__form-body-field-ed">
+                        <span className="text-small">College : </span>
+                        <input type="text" placeholder="College" defaultValue={college} onChange={e => setCollege(e.target.value)} className="input input-small" />
+                    </div>
+                    <div className="profile__form-body-field-ed">
+                        <span className="text-small">Location : </span>
+                        <input type="text" placeholder="Location" defaultValue={location} onChange={e => setLocation(e.target.value)} className="input input-small" />
+                    </div>
+                    <div className="profile__form-body-field-ed">
+                        <span className="text">Time Period : </span>
+                    </div>
+                    <div className="profile__form-body-field-ed">
+                        <div className="profile__form-body-field-ed-1">
+                            <span className="text-small">From : </span>
+                            <input type="date" placeholder="Date" defaultValue={startDate} onChange={e => setStartDate(e.target.value)} className="input input-small" />
+                        </div>
+                        <div className="profile__form-body-field-ed-2">
+                            <span className="text-small">To : </span>
+                            <input type="date" placeholder="Date" defaultValue={endDate} onChange={e => setEndDate(e.target.value)} className="input input-small" />
+                        </div>
+                    </div>
+                    <button className="profile__form-body-button button" type="submit" onClick={onSubmit}>
+                        Add
+                    </button>
+
+                </div>
             ) : null}
 
             {educationDegree ? (
                 educationDegree.map((info) => (
-                    <div className="ui feed" key={info.degree}>
-                        <div className="ui button red right floated" onClick={() => removeHandler(info)}>
+                    <div className="profile__form-details" key={info.degree}>
+            <div className="profile__form-header">
+                            <div className="profile__form-details-header">
+                                {info.degree}
+                            </div>
+                        <div className="profile__form-header-2-red button-small" onClick={() => removeHandler(info)}>
                             Remove
                             </div>
-                        <div className="content">
-                            <div className="header">
-                                <h3>{info.degree}</h3>
                             </div>
-                            <div className="summary">
+                        {/* <div className="content"> */}
+                            <div className="profile__form-details-summary">
                                 {info.college}
                             </div>
-                            <div className="summary">
+                            <div className="profile__form-details-summary">
                                 {info.location}
                             </div>
-                            <div className="summary">
+                            <div className="profile__form-details-summary">
                                 {info.startDate} to {info.endDate}
                             </div>
-                        </div>
+                        {/* </div> */}
                     </div>
                 ))
             ) :

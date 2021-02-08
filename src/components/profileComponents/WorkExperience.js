@@ -43,71 +43,75 @@ const WorkExperience = () => {
     }
 
     return (
-        <div className="ui form">
-            <div className="ui button primary right floated" type="submit" onClick={() => setShowCard(!showCard)}>
-                {!showCard ? 'Add' : 'Cancel'}
+        <div className="profile__form">
+            <div className="profile__form-header">
+                <div className="profile__form-header-1">Work Experience : </div>
+                <div className="profile__form-header-2 button" type="submit" onClick={() => setShowCard(!showCard)}>
+                    {!showCard ? 'Add' : 'Cancel'}
+                </div>
             </div>
-            <h2>Work Experience</h2>
+
             {showCard ? (
-                <div className="ui form error" onSubmit={onSubmit}>
+                <div className="profile__form-body" onSubmit={onSubmit}>
                     {error ?
-                        (<div className="ui error message">
+                        (<div className="profile__form-body-error">
                             <p>{error}</p>
                         </div>)
                         : null}
 
-                    <div className="field">
-                        <label>Job Title</label>
-                        <input type="text" placeholder="Job Title" defaultValue={jobTitle} onChange={e => setJobTitle(e.target.value)} />
+                    <div className="profile__form-body-field-ed">
+                        <span className="text-small">Job Title : </span>
+                        <input type="text" placeholder="Job Title" defaultValue={jobTitle} onChange={e => setJobTitle(e.target.value)} className="input input-small" />
                     </div>
-                    <div className="field">
-                        <label>Company</label>
-                        <input type="text" placeholder="Company" defaultValue={company} onChange={e => setCompany(e.target.value)} />
+                    <div className="profile__form-body-field-ed">
+                        <span className="text-small">Company : </span>
+                        <input type="text" placeholder="Company" defaultValue={company} onChange={e => setCompany(e.target.value)} className="input input-small" />
                     </div>
-                    <div className="field">
-                        <label>Location</label>
-                        <input type="text" placeholder="Location" defaultValue={location} onChange={e => setLocation(e.target.value)} />
+                    <div className="profile__form-body-field-ed">
+                        <span className="text-small">Location : </span>
+                        <input type="text" placeholder="Location" defaultValue={location} onChange={e => setLocation(e.target.value)} className="input input-small" />
                     </div>
-                    <div className="field">
-                        <label>Time Period</label>
+                    <div className="profile__form-body-field-ed">
+                        <span className="text">Time Period</span>
                     </div>
-                    <div className="two fields">
-                        <div className="field">
-                            <label>From : </label>
-                            <input type="date" placeholder="Date" defaultValue={startDate} onChange={e => setStartDate(e.target.value)} />
+                    <div className="profile__form-body-field-ed">
+                        <div className="profile__form-body-field-ed-1">
+                            <span className="text-small">From : </span>
+                            <input type="date" placeholder="Date" defaultValue={startDate} onChange={e => setStartDate(e.target.value)} className="input input-small" />
                         </div>
-                        <div className="field">
-                            <label>To : </label>
-                            <input type="date" placeholder="Date" defaultValue={endDate} onChange={e => setEndDate(e.target.value)} />
+                        <div className="profile__form-body-field-ed-2">
+                            <span className="text-small">To : </span>
+                            <input type="date" placeholder="Date" defaultValue={endDate} onChange={e => setEndDate(e.target.value)} className="input input-small" />
                         </div>
                     </div>
-                    <div className="ui primary button" type="submit" onClick={onSubmit}>
+                    <button className="profile__form-body-button button" type="submit" onClick={onSubmit}>
                         Add
-            </div>
+            </button>
 
                 </div>
             ) : null}
             {workExperience ? (
                 workExperience.map((info) => (
-                    <div className="ui feed" key={info.jobTitle}>
-                        <div className="ui button red right floated" onClick={() => removeHandler(info)}>
-                            Remove
+                    <div className="profile__form-details" key={info.jobTitle}>
+                        <div className="profile__form-header">
+                            <div className="profile__form-details-header">
+                                {info.jobTitle}
                             </div>
-                        <div className="content">
-                            <div className="header">
-                                <h3>{info.jobTitle}</h3>
+                            <div className="profile__form-header-2-red button-small" onClick={() => removeHandler(info)}>
+                                Remove
                             </div>
-                            <div className="summary">
+                        </div>
+
+                            <div className="profile__form-details-summary">
                                 {info.company}
                             </div>
-                            <div className="summary">
+                            <div className="profile__form-details-summary">
                                 {info.location}
                             </div>
-                            <div className="summary">
+                            <div className="profile__form-details-summary">
                                 {info.startDate} to {info.endDate}
                             </div>
                         </div>
-                    </div>
                 ))
             ) :
                 null}
