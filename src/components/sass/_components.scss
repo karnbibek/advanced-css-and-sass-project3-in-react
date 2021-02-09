@@ -7,8 +7,18 @@
     align-items: center;
     align-self: stretch;
 
+    &-link {
+      // margin: 0.5rem;
+      // text-decoration: none;
+      // color: inherit;
+      &-comp {
+        text-decoration: none;
+      color: inherit;
+      }
+    }
+
     & > * {
-      // user-nav and all of its direct children
+      // user-nav-left and all of its direct children
       padding: 0 2rem;
       cursor: pointer;
       height: 100%;
@@ -25,17 +35,58 @@
   &__right {
     align-items: flex-end;
     align-content: center;
+    justify-content: center;
     padding: 0 2rem;
+    display: flex;
+    cursor: pointer;
+    color: var(--color-grey-dark-2);
 
-    &-link {
-      margin: 0.5rem;
-      text-decoration: none;
-      color: inherit;
+    &-logo {
+      width: 12%;
+      height: auto;
+      display: flex;
+      margin-right: 1rem;
+
+      &-img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 2px;
+      }
     }
 
+    &-logo-o {
+      width: 20%;
+      height: auto;
+      display: flex;
+      margin-right: 1rem;
+
+      &-img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 2px;
+      }
+    }
+
+    &-signin {
+      // background-color: red;
+      // color: var(--color-light-green);
+    }
+
+    &-signout {
+      // background-color: green;
+      // color: var(--color-primary-dark);
+    }
+
+    // &-link {
+    //   margin: 0.5rem;
+    //   text-decoration: none;
+    //   color: inherit;
+    // }
+
     &:hover {
-      background-color: var(--color-primary-light);
-      color: var(--color-grey-light-1);
+      // background-color: red;
+      background-color: var(--color-grey-light-1);
+      color: var(--color-primary-dark);
     }
   }
 }

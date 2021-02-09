@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
 import { Link, useHistory } from 'react-router-dom';
+import GoogleAuth from './authentication/GoogleAuth';
 
 const Navbar = () => {
     const history = useHistory();
@@ -16,16 +17,18 @@ const Navbar = () => {
     return (
         <div className="navbar">
             <div className="navbar__left">
-            <div className="item" onClick={homePage}>
-                Home
+                <div className="item" onClick={homePage}>
+                    Home
+                </div>
+                <div className="item" onClick={profilePage}>
+                    Go To Profile
+                </div>
+                <div className="navbar__left-link">
+                    <Link to="/companies" target="_blank" className="navbar__left-link-comp">See Companies Jobs</Link>
+
+                </div>
             </div>
-            <div className="item" onClick={profilePage}>
-                Go To Profile
-            </div>
-            </div>
-            <div className="navbar__right">
-                <Link to="/companies" target="_blank" className="navbar__right-link">See Companies Jobs</Link>
-            </div>
+            <GoogleAuth />
         </div>
     );
 }

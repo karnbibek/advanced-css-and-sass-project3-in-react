@@ -1,0 +1,5 @@
+export const SELECTED_COMPANY= 'SELECTED_COMPANY';
+export const SELECTED_COMPANYJOB= 'SELECTED_COMPANYJOB';
+export const SELECTED_JOB= 'SELECTED_JOB';
+export const SIGN_IN= 'SIGN_IN';
+export const SIGN_OUT= 'SIGN_OUT';
