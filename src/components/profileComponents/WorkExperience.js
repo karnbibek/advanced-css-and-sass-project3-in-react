@@ -1,30 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import WorkForm from './profileForms/WorkForm';
 
 const WorkExperience = () => {
 
-    const [jobTitle, setJobTitle] = useState('');
-    const [company, setCompany] = useState('');
-    const [location, setLocation] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-
     const [showCard, setShowCard] = useState(false);
-    const [error, setError] = useState('');
     const [workExperience, setWorkExperience] = useState([]);
 
-    const onSubmit = async (event) => {
-        if (!jobTitle || !company || !location || !startDate || !endDate) {
-            await setError('Please enter all fields correctly!');
-        }
-        else {
-            event.preventDefault();
-            await setError(null);
+    const onSubmit = ({ jobTitle, company, location, startDate, endDate }) => {
             const workExperience = JSON.parse(localStorage.getItem("workExperience") || '[]');
             const workExp = { jobTitle, company, location, startDate, endDate };
             localStorage.setItem('workExperience', JSON.stringify([...workExperience, (workExp)]));
-            await setWorkExperience([...workExperience, (workExp)]);
-            await setShowCard(false);
-        }
+            setWorkExperience([...workExperience, (workExp)]);
+            setShowCard(false);
     }
 
     useEffect(() => {
@@ -52,43 +39,7 @@ const WorkExperience = () => {
             </div>
 
             {showCard ? (
-                <div className="profile__form-body" onSubmit={onSubmit}>
-                    {error ?
-                        (<div className="profile__form-body-error">
-                            <p>{error}</p>
-                        </div>)
-                        : null}
-
-                    <div className="profile__form-body-field-ed">
-                        <span className="text-small">Job Title : </span>
-                        <input type="text" placeholder="Job Title" defaultValue={jobTitle} onChange={e => setJobTitle(e.target.value)} className="input input-small" />
-                    </div>
-                    <div className="profile__form-body-field-ed">
-                        <span className="text-small">Company : </span>
-                        <input type="text" placeholder="Company" defaultValue={company} onChange={e => setCompany(e.target.value)} className="input input-small" />
-                    </div>
-                    <div className="profile__form-body-field-ed">
-                        <span className="text-small">Location : </span>
-                        <input type="text" placeholder="Location" defaultValue={location} onChange={e => setLocation(e.target.value)} className="input input-small" />
-                    </div>
-                    <div className="profile__form-body-field-ed">
-                        <span className="text">Time Period</span>
-                    </div>
-                    <div className="profile__form-body-field-ed">
-                        <div className="profile__form-body-field-ed-1">
-                            <span className="text-small">From : </span>
-                            <input type="date" placeholder="Date" defaultValue={startDate} onChange={e => setStartDate(e.target.value)} className="input input-small" />
-                        </div>
-                        <div className="profile__form-body-field-ed-2">
-                            <span className="text-small">To : </span>
-                            <input type="date" placeholder="Date" defaultValue={endDate} onChange={e => setEndDate(e.target.value)} className="input input-small" />
-                        </div>
-                    </div>
-                    <button className="profile__form-body-button button" type="submit" onClick={onSubmit}>
-                        Add
-            </button>
-
-                </div>
+                <WorkForm onSubmit={onSubmit} />
             ) : null}
             {workExperience ? (
                 workExperience.map((info) => (

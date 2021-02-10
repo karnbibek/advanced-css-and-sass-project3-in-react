@@ -1,29 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { reduxForm, Field } from 'redux-form';
 
-const Skills = () => {
+const Skills = ({ handleSubmit }) => {
 
-    const [skill, setSkill] = useState('');
-    const [rating, setRating] = useState('');
+    // const [skill, setSkill] = useState('');
+    // const [rating, setRating] = useState('');
 
     const [showCard, setShowCard] = useState(false);
-    const [error, setError] = useState('');
+    // const [error, setError] = useState('');
     const [skillRating, setSkillRating] = useState([]);
 
-    const onSubmit = async (event) => {
-        if (!skill || !rating || rating > 10 || rating < 0) {
-            await setError('Please enter all fields correctly!');
-        }
-        else {
-            event.preventDefault();
-            await setError(null);
-            const skillRating = JSON.parse(localStorage.getItem("skillRating") || '[]');
-            const skillRate = { skill, rating };
-            localStorage.setItem('skillRating', JSON.stringify([...skillRating, (skillRate)]));
-            await setSkillRating([...skillRating, (skillRate)]);
-            await setShowCard(false);
-            await setSkill('');
-            await setRating('');
-        }
+    const onSubmit = ({ skill, rating }) => {
+        
+        console.log(skill);
+        const skillRating = JSON.parse(localStorage.getItem("skillRating") || '[]');
+        const skillRate = { skill, rating };
+        localStorage.setItem('skillRating', JSON.stringify([...skillRating, (skillRate)]));
+        setSkillRating([...skillRating, (skillRate)]);
+        setShowCard(false);
+        
     }
 
     useEffect(() => {
@@ -41,6 +36,28 @@ const Skills = () => {
         setSkillRating(filteredInfo);
     }
 
+    const renderError = ({ error, touched }) => {
+        if (touched && error) {
+            return (
+                <div className="error">
+                    <div className="error-text">
+                        {error}
+                    </div>
+                </div>
+            );
+        }
+    }
+
+    const renderInput = ({ input, label, meta, type, place }) => {
+        return (
+            <div className="profile__form-body-field-ed">
+                <span className="text-small">{label}</span>
+                <input {...input} type="text" autoComplete="on" placeholder={place} className="input input-small" />
+                {renderError(meta)}
+            </div>
+        );
+    }
+
     return (
         <div className="profile__form">
             <div className="profile__form-header">
@@ -50,26 +67,16 @@ const Skills = () => {
                 </button>
             </div>
             {showCard ? (
-                <div className="profile__form-body" onSubmit={onSubmit}>
-                    {error ?
-                        (<div className="profile__form-body-error">
-                            <p>{error}</p>
-                        </div>)
-                        : null}
+                <form className="profile__form-body" onSubmit={handleSubmit(onSubmit)}>
+                    
+                    <Field name="skill" component={renderInput} label="Skill/Technology Name : " place='Skill/Technology Name' />
+                    <Field name="rating" component={renderInput} label="Rating Out of 10 : " place='Rating Out of 10' />
 
-                    <div className="profile__form-body-field-ed">
-                        <span className="text-small">Skill/Technology Name : </span>
-                        <input type="text" placeholder="Skill/Technology Name" defaultValue={skill} onChange={e => setSkill(e.target.value)} className="input input-small" />
-                    </div>
-                    <div className="profile__form-body-field-ed">
-                        <span className="text-small">Rating Out of 10 : </span>
-                        <input type="number" placeholder="Rating Out of 10" defaultValue={rating} onChange={e => setRating(e.target.value)} className="input input-small" />
-                    </div>
-                    <button className="profile__form-body-button button" type="submit" onClick={onSubmit}>
+                    <button className="profile__form-body-button button" action="submit">
                         Add
-                </button>
+                    </button>
 
-                </div>
+                </form>
             ) : null}
 
             {skillRating ? (
@@ -94,4 +101,18 @@ const Skills = () => {
     )
 }
 
-export default Skills;
+const validate = formValues => {
+    const errors = {};
+    console.log(formValues);
+    if (!formValues.skill) {
+        errors.skill = "Skill is mandatory";
+    }
+
+    if (!formValues.rating) {
+        errors.rating = "Rating is mandatory";
+    }
+
+    return errors;
+}
+
+export default reduxForm({ form: "skills", validate })(Skills);

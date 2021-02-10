@@ -1,36 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { reduxForm, Field } from 'redux-form';
 
-const Education = () => {
-
-    const [degree, setDegree] = useState('');
-    const [college, setCollege] = useState('');
-    const [location, setLocation] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-
+const Education = ({ handleSubmit }) => {
+// console.log(props.handleSubmit);
     const [showCard, setShowCard] = useState(false);
-    const [error, setError] = useState('');
     const [educationDegree, setEducationDegree] = useState([]);
 
-    const onSubmit = async (event) => {
-        if (!degree || !college || !location) {
-            await setError('Please enter all fields correctly!');
-            setTimeout(() => {
-                setError('');
-            }, 2000);
-        }
-        else {
-            event.preventDefault();
-            await setError('');
-            const educationDegree = JSON.parse(localStorage.getItem("educationDegree") || '[]');
-            const educat = { degree, college, location, startDate, endDate };
-            localStorage.setItem('educationDegree', JSON.stringify([...educationDegree, (educat)]));
-            await setEducationDegree([...educationDegree, (educat)]);
-            await setShowCard(false);
-            await setDegree('');
-            await setCollege('');
-            await setLocation('');
-        }
+    const onSubmit = ({ degree, college, location, startDate, endDate }) => {
+        const educationDegree = JSON.parse(localStorage.getItem("educationDegree") || '[]');
+        const educat = { degree, college, location, startDate, endDate };
+        // console.log(educat);
+        localStorage.setItem('educationDegree', JSON.stringify([...educationDegree, (educat)]));
+        setEducationDegree([...educationDegree, (educat)]);
+        setShowCard(false);
     }
 
     useEffect(() => {
@@ -48,77 +30,85 @@ const Education = () => {
         setEducationDegree(filteredInfo);
     }
 
+    const renderInput = ({ input, label, meta, type, cName, place }) => {
+        console.log(input);
+        return (
+            <>
+                <div className={`profile__form-body-field-ed${cName}`} >
+                    <span className="text-small">{label}</span>
+                    <input {...input} placeholder={place} type={type} className="input input-small" />
+                    {renderError(meta)}
+                </div>
+            </>
+        );
+    }
+
+    const renderError = ({ error, touched }) => {
+        if (touched && error) {
+            return (
+                <div className="error">
+                    <div className="error-text">
+                        {error}
+                    </div>
+                </div>
+            );
+        }
+    }
+
     return (
         <div className="profile__form">
             <div className="profile__form-header">
                 <div className="profile__form-header-1">Education : </div>
                 <button className="profile__form-header-2 button" type="submit" onClick={() => setShowCard(!showCard)}>
-                    {!showCard ? 'Add' : 'Cancel'}
+                    {showCard ? 'Cancel' : 'Add'}
                 </button>
             </div>
             {showCard ? (
-                <div className="profile__form-body" onSubmit={onSubmit}>
-                    {error ?
-                        (<div className="profile__form-body-error">
-                            <p>{error}</p>
-                        </div>)
-                        : null}
+                <form className="profile__form-body" onSubmit={handleSubmit(onSubmit)}>
 
-                    <div className="profile__form-body-field-ed">
-                        <span className="text-small">Degree : </span>
-                        <input type="text" placeholder="Degree" defaultValue={degree} onChange={e => setDegree(e.target.value)} className="input input-small" />
-                    </div>
 
-                    <div className="profile__form-body-field-ed">
-                        <span className="text-small">College : </span>
-                        <input type="text" placeholder="College" defaultValue={college} onChange={e => setCollege(e.target.value)} className="input input-small" />
-                    </div>
-                    <div className="profile__form-body-field-ed">
-                        <span className="text-small">Location : </span>
-                        <input type="text" placeholder="Location" defaultValue={location} onChange={e => setLocation(e.target.value)} className="input input-small" />
-                    </div>
+                    <Field name="degree" component={renderInput} label="Degree: " place="Degree" type="text" cName='' />
+
+                    <Field name="college" component={renderInput} place="College" label="College: " type="text" cName='' />
+
+                    <Field name="location" component={renderInput} place="Location" label="Location: " type="text" cName='' />
+
                     <div className="profile__form-body-field-ed">
                         <span className="text">Time Period : </span>
                     </div>
                     <div className="profile__form-body-field-ed">
-                        <div className="profile__form-body-field-ed-1">
-                            <span className="text-small">From : </span>
-                            <input type="date" placeholder="Date" defaultValue={startDate} onChange={e => setStartDate(e.target.value)} className="input input-small" />
-                        </div>
-                        <div className="profile__form-body-field-ed-2">
-                            <span className="text-small">To : </span>
-                            <input type="date" placeholder="Date" defaultValue={endDate} onChange={e => setEndDate(e.target.value)} className="input input-small" />
-                        </div>
+
+                        <Field name="startDate" component={renderInput} label="From: " type="date" cName='-1' />
+                        <Field name="endDate" component={renderInput} label="To: " type="date" cName='-2' />
+
                     </div>
-                    <button className="profile__form-body-button button" type="submit" onClick={onSubmit}>
+                    <button className="profile__form-body-button button" action="submit">
                         Add
                     </button>
 
-                </div>
+                </form>
             ) : null}
 
             {educationDegree ? (
                 educationDegree.map((info) => (
                     <div className="profile__form-details" key={info.degree}>
-            <div className="profile__form-header">
+                        <div className="profile__form-header">
                             <div className="profile__form-details-header">
                                 {info.degree}
                             </div>
-                        <div className="profile__form-header-2-red button-small" onClick={() => removeHandler(info)}>
-                            Remove
+                            <div className="profile__form-header-2-red button-small" onClick={() => removeHandler(info)}>
+                                Remove
                             </div>
-                            </div>
-                        {/* <div className="content"> */}
-                            <div className="profile__form-details-summary">
-                                {info.college}
-                            </div>
-                            <div className="profile__form-details-summary">
-                                {info.location}
-                            </div>
-                            <div className="profile__form-details-summary">
-                                {info.startDate} to {info.endDate}
-                            </div>
-                        {/* </div> */}
+                        </div>
+                        <div className="profile__form-details-summary">
+                            {info.college}
+                        </div>
+                        <div className="profile__form-details-summary">
+                            {info.location}
+                        </div>
+                        <div className="profile__form-details-summary">
+                            {info.startDate} to {info.endDate}
+                        </div>
                     </div>
                 ))
             ) :
@@ -127,4 +117,27 @@ const Education = () => {
     )
 }
 
-export default Education;
+const validate = formValues => {
+    const errors = {};
+    // console.log(formValues);
+
+    if (!formValues.degree) {
+        errors.degree = "Degree is Compulsory!!";
+    }
+    if (!formValues.college) {
+        errors.college = "College is Compulsory!!";
+    }
+    if (!formValues.location) {
+        errors.location = "Location is Compulsory!!";
+    }
+    if (!formValues.startDate) {
+        errors.startDate = "Start Date is Compulsory!!";
+    }
+    if (!formValues.endDate) {
+        errors.endDate = "End Date is Compulsory!!";
+    }
+
+    return errors;
+}
+
+export default reduxForm({ form: "Education", validate })(Education);

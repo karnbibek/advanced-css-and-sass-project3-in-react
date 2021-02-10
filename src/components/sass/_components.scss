@@ -13,7 +13,7 @@
       // color: inherit;
       &-comp {
         text-decoration: none;
-      color: inherit;
+        color: inherit;
       }
     }
 
@@ -67,22 +67,6 @@
       }
     }
 
-    &-signin {
-      // background-color: red;
-      // color: var(--color-light-green);
-    }
-
-    &-signout {
-      // background-color: green;
-      // color: var(--color-primary-dark);
-    }
-
-    // &-link {
-    //   margin: 0.5rem;
-    //   text-decoration: none;
-    //   color: inherit;
-    // }
-
     &:hover {
       // background-color: red;
       background-color: var(--color-grey-light-1);
@@ -95,15 +79,8 @@
 .jobBrief,
 .jobDetail {
   margin-bottom: 20px;
-  // border: 2px solid black;
   padding: 2rem;
   cursor: pointer;
-  // background-color: var(--color-grey-light-2);
-  // background-image: linear-gradient(
-  //     to right bottom,
-  //     var(--color-primary-light),
-  //     var(--color-primary-dark)
-  //   );
   color: var(--color-grey-light-2);
   border-radius: 20px;
   display: flex;
@@ -175,8 +152,8 @@
     var(--color-dark-green)
   );
   position: sticky;
-  top: 2em;
-  right: 3em;
+  top: 25%;
+  // right: 3em;
   margin-bottom: 6rem;
 }
 
@@ -190,6 +167,7 @@
   outline: none;
 
   &-small {
+    cursor: pointer;
     padding: 0.6rem 2rem;
     font-size: 1rem;
     color: var(--color-grey-light-1);
@@ -243,6 +221,21 @@
 
 .text-small {
   font-size: 1.5rem;
+}
+
+// Error field and text of redux form
+.error {
+  margin: 1rem;
+  padding: .5rem;
+  // border: 1px solid rgb(241, 141, 141);
+  border-radius: 5px;
+  background-color: var(--color-grey-light-4);
+
+  &-text {
+    color: red;
+    font-size: 1.5rem;
+    text-align: center;
+  }
 }
 
 // Profile section
@@ -300,7 +293,7 @@
         margin: 0.8rem 2rem 0 2rem;
 
         &-1 {
-            margin-right: inherit;
+          margin-right: inherit;
         }
 
         &-ed {
