@@ -146,11 +146,12 @@
 }
 
 .jobDetail {
-  background-image: linear-gradient(
-    to right bottom,
-    var(--color-light-green),
-    var(--color-dark-green)
-  );
+  // background-image: linear-gradient(
+  //   to right bottom,
+  //   var(--color-light-green),
+  //   var(--color-dark-green)
+  // );
+  background-image: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
   position: sticky;
   top: 25%;
   // right: 3em;

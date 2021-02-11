@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import FieldComponent from './FieldComponent';
+import FieldComponent from './profileForms/PersonalInfoForm';
 
 const PersonalInformation = () => {
 

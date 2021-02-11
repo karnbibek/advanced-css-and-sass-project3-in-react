@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { reduxForm, Field } from 'redux-form';
+import SkillsForm from './profileForms/SkillsForm';
 
 const Skills = ({ handleSubmit }) => {
 
@@ -36,28 +36,6 @@ const Skills = ({ handleSubmit }) => {
         setSkillRating(filteredInfo);
     }
 
-    const renderError = ({ error, touched }) => {
-        if (touched && error) {
-            return (
-                <div className="error">
-                    <div className="error-text">
-                        {error}
-                    </div>
-                </div>
-            );
-        }
-    }
-
-    const renderInput = ({ input, label, meta, type, place }) => {
-        return (
-            <div className="profile__form-body-field-ed">
-                <span className="text-small">{label}</span>
-                <input {...input} type="text" autoComplete="on" placeholder={place} className="input input-small" />
-                {renderError(meta)}
-            </div>
-        );
-    }
-
     return (
         <div className="profile__form">
             <div className="profile__form-header">
@@ -67,16 +45,7 @@ const Skills = ({ handleSubmit }) => {
                 </button>
             </div>
             {showCard ? (
-                <form className="profile__form-body" onSubmit={handleSubmit(onSubmit)}>
-                    
-                    <Field name="skill" component={renderInput} label="Skill/Technology Name : " place='Skill/Technology Name' />
-                    <Field name="rating" component={renderInput} label="Rating Out of 10 : " place='Rating Out of 10' />
-
-                    <button className="profile__form-body-button button" action="submit">
-                        Add
-                    </button>
-
-                </form>
+                <SkillsForm onSubmit={onSubmit} />
             ) : null}
 
             {skillRating ? (
@@ -101,18 +70,4 @@ const Skills = ({ handleSubmit }) => {
     )
 }
 
-const validate = formValues => {
-    const errors = {};
-    console.log(formValues);
-    if (!formValues.skill) {
-        errors.skill = "Skill is mandatory";
-    }
-
-    if (!formValues.rating) {
-        errors.rating = "Rating is mandatory";
-    }
-
-    return errors;
-}
-
-export default reduxForm({ form: "skills", validate })(Skills);
+export default Skills;

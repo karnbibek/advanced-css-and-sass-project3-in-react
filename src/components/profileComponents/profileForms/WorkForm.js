@@ -15,27 +15,26 @@ const WorkForm = (props) => {
 
     const renderInput = ({ input, label, meta, type, cName, place }) => {
         return (
-            <>
-                <div className="profile__form-body-field-ed">
-                    <span className="text-small">{label}</span>
-                    <input {...input} placeholder={place} className="input input-small" type={type} />
-                    {renderError(meta)}
-                </div>
-            </>
+            <div className={`profile__form-body-field-ed${cName}`}>
+                <span className="text-small">{label}</span>
+                <input {...input} placeholder={place} className="input input-small" type={type} />
+                {renderError(meta)}
+            </div>
         );
     }
 
     return (
         <form onSubmit={props.handleSubmit(props.onSubmit)} className="profile__form-body">
-                <Field name="jobTitle" component={renderInput} label="Job Title: " type="text" cName='' place='Job Title' />
-                <Field name="company" component={renderInput} label="Company: " type="text" cName='' place='Company' />
-                <Field name="location" component={renderInput} label="Location: " type="text" cName='' place='Location' />
-                <div className="profile__form-body-field-ed">
-                    <span className="text">Time Period</span>
-                </div>
-                <Field name="startDate" component={renderInput} label="From: " type="date" cName='' place='Start Date' />
-                <Field name="endDate" component={renderInput} label="To: " type="date" cName='' place='End Date' />
-                
+            <Field name="jobTitle" component={renderInput} label="Job Title: " type="text" cName='' place='Job Title' />
+            <Field name="company" component={renderInput} label="Company: " type="text" cName='' place='Company' />
+            <Field name="location" component={renderInput} label="Location: " type="text" cName='' place='Location' />
+            <div className="profile__form-body-field-ed">
+                <span className="text">Time Period</span>
+            </div>
+            <div className="profile__form-body-field-ed">
+            <Field name="startDate" component={renderInput} label="From: " type="date" cName='-1' place='Start Date' />
+            <Field name="endDate" component={renderInput} label="To: " type="date" cName='-2' place='End Date' />
+            </div>
             <button className="profile__form-body-button button" action="submit">
                 Add
             </button>

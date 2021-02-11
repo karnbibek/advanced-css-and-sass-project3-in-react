@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import '../App.css';
 import { Link, useHistory } from 'react-router-dom';
 import GoogleAuth from './authentication/GoogleAuth';
 
-const Navbar = () => {
+const Navbar = (props) => {
+
     const history = useHistory();
 
     const homePage = () => {
@@ -20,9 +23,10 @@ const Navbar = () => {
                 <div className="item" onClick={homePage}>
                     Home
                 </div>
-                <div className="item" onClick={profilePage}>
+                {props.auth.isSignedIn ?
+                    <div className="item" onClick={profilePage}>
                     Go To Profile
-                </div>
+                </div> : null}
                 <div className="navbar__left-link">
                     <Link to="/companies" target="_blank" className="navbar__left-link-comp">See Companies Jobs</Link>
 
@@ -33,4 +37,8 @@ const Navbar = () => {
     );
 }
 
-export default Navbar;
+const mapStateToProps = state => {
+    return state;
+}
+
+export default connect(mapStateToProps)(Navbar);

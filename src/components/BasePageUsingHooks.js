@@ -44,15 +44,13 @@ const BasePageUsingHooks = (props) => {
         <div className="contents">
             <div className="contents__one">
                 <div className="contents__one-header">
-                    {/* <h1 className="headers" style={{ marginBottom: "15px" }}> */}
-                        Mentor-Students Job Portal
-                        {/* </h1> */}
+                    Mentor-Students Job Portal
                 </div>
                 <div className="contents__one-image">
                     <img src="https://picsum.photos/id/180/500/200" alt="" />
                 </div>
             </div>
-                <SearchBar nameChangeHandler={nameChangeHandler} addressChangeHandler={addressChangeHandler} />
+            <SearchBar nameChangeHandler={nameChangeHandler} addressChangeHandler={addressChangeHandler} />
 
             <div className="contents__grid">
                 <div className="contents__grid__row">
@@ -62,10 +60,7 @@ const BasePageUsingHooks = (props) => {
                         </div>
                         :
                         <div className="contents__grid__row-col-1-of-3">
-                            {/* {filteredJobs ?  */}
                             {filteredJobs.map((job) => (<JobBrief key={job.name} job={job} link='jobBrief' jobDetailsHandler={jobDetailsHandler} />))
-                                // : 
-                                // jobs.map((job) => (<JobBrief key={job.name} job={job} link='link jobBrief' jobDetailsHandler={jobDetailsHandler} />))
                             }
                         </div>
                     }
