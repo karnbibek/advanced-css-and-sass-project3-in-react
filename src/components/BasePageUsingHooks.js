@@ -16,7 +16,7 @@ const BasePageUsingHooks = (props) => {
     useEffect(() => {
         setTimeout(() =>
             setIsLoading(false),
-            200);
+            5000);
         // setFilteredJobs(props.jobs);
     });
 
@@ -55,8 +55,8 @@ const BasePageUsingHooks = (props) => {
             <div className="contents__grid">
                 <div className="contents__grid__row">
                     {isLoading ?
-                        <div className="ui active inverted dimmer" style={{ marginTop: "20px" }}>
-                            <div className="ui text loader">Loading</div>
+                        <div className="loader">
+                            Loading
                         </div>
                         :
                         <div className="contents__grid__row-col-1-of-3">
